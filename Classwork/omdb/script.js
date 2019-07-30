@@ -22,7 +22,7 @@ var searchBox = document.querySelector("#searchBox");
 var typeSelect = document.querySelector("#typeSelect");
 var yearBox = document.querySelector("#yearBox");
 var searchButton = document.querySelector("#searchButton");
-var resultsP = document.querySelector(".results");
+var resultsField = document.querySelector(".resultsField");
 
 var apiKey = "bc1b5902";
 
@@ -35,8 +35,7 @@ searchButton.addEventListener("click", function(){
     var typeValue = typeSelect.value;
     var yearValue = yearBox.value;
 
-    resultsP.innerText = "";
-    if (titleValue.length >= 3 ){
+    if (titleValue.trim().length >= 3 ){
         console.log(`Title: ${titleValue}`, `Type: ${typeValue}`, `Year: ${yearValue}`); 
     }  else {
         console.log("Enter 3 or more characters!");
@@ -61,21 +60,21 @@ searchButton.addEventListener("click", function(){
             console.log(res);
 
             for(i=0; i < jsonResults.Search.length; i++){
-                resultsP.createElement("div").add
-                resultsP.innerText = jsonResults.Search[0].Title
-        }
-            
-        });
-});
-
-// take values and format for API request / parse
-// http://www.omdbapi.com/?apikey=bc1b5902&t=For&type=Movie&y=1994
-
-// apikey
-// t = title
-// type = type
-// y = year
-
-// set up request
-
-// stringify and convert back for html
+                console.log(jsonResults.Search[0].Title);
+                var poster = "";
+                if (jsonResults.Search[i].Poster != "N/A"){
+                    poster = `<img src="${jsonResults.Search[i].Poster}" alt="" >`
+                }
+                
+                resultsField.innerHTML += 
+                    `
+                    <div class="searchResult">
+                    ${poster}
+                    Title: ${jsonResults.Search[i].Title} <br>
+                    Year: ${jsonResults.Search[i].Year} <br>
+                    Type: ${jsonResults.Search[i].Type} <br>
+                    </div>
+                    `
+            };
+        })
+    });
