@@ -34,6 +34,7 @@ searchButton.addEventListener("click", function(){
     var titleValue = searchBox.value;
     var typeValue = typeSelect.value;
     var yearValue = yearBox.value;
+    resultsField.innerHTML = "";
 
     if (titleValue.trim().length >= 3 ){
         console.log(`Title: ${titleValue}`, `Type: ${typeValue}`, `Year: ${yearValue}`); 
@@ -56,6 +57,10 @@ searchButton.addEventListener("click", function(){
             return response.json();
         })
         .then(function (res){
+            if (res.Response === "False"){
+                resultsField.innerHTML = `<div class="searchResult"> Error: ${res.Error} </div>`;
+                return;
+            }
             jsonResults = res;
             console.log(res);
 
@@ -76,5 +81,6 @@ searchButton.addEventListener("click", function(){
                     </div>
                     `
             };
+            resultsField.innerHTML += `<div class="searchResult totalResults">Total Results: ${jsonResults.totalResults}`;
         })
     });
