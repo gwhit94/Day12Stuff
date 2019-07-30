@@ -46,12 +46,14 @@
             box-shadow: inset 0 0 7px  #43B358;
         }
         .resultsField{
-            background-color: #FFB8C4;
+            background-color: #B35D6C;
             box-shadow: inset 0 0 7px #B35D6C;
             text-align: left;
             white-space: wrap;
             overflow: auto;
             text-overflow: ellipsis;
+            display: flex;
+            flex-direction: column;
         }
         
         #typeSelect, #searchBox, #yearBox, #searchButton{
@@ -88,7 +90,20 @@
 
             }
         }
+            .searchResult{
+                display: flex;
+                padding: 5px; 
+                margin:3px;
+                align-items: flex-start;
+                background-color: #FFB8C4;
+                box-shadow: inset 0 0 5px #B35D6C;
+            }
 
+            img{
+                height: 90px;
+                width: 45px;
+                margin: 5px;
+            }
         
     </style>
 </head>
@@ -124,9 +139,8 @@
     </div>
     <!-- RESULTS -->
     <div class="container resultsField">
-        <p class="results"></p>
+
     </div>
-    
     
     <script src="script.js"></script>
 </body>
