@@ -15,9 +15,67 @@
 
 //     Then let the user pick a page out of that many to select to. This will be a lesson in the wonders / frustrations of pagination.
 //     Add styling and additional functionality as time permits.
+
+
+
 var searchBox = document.querySelector("#searchBox");
+var typeSelect = document.querySelector("#typeSelect");
+var yearBox = document.querySelector("#yearBox");
 var searchButton = document.querySelector("#searchButton");
+var resultsP = document.querySelector(".results");
+
+var apiKey = "bc1b5902";
+
+var query;
+var jsonResults;
+
 searchButton.addEventListener("click", function(){
-    var queryValue = searchBox.value;
-    console.log(queryValue);
+
+    var titleValue = searchBox.value;
+    var typeValue = typeSelect.value;
+    var yearValue = yearBox.value;
+
+    resultsP.innerText = "";
+    if (titleValue.length >= 3 ){
+        console.log(`Title: ${titleValue}`, `Type: ${typeValue}`, `Year: ${yearValue}`); 
+    }  else {
+        console.log("Enter 3 or more characters!");
+        return;
+    };
+    if (typeValue === ""){
+        query = `http://www.omdbapi.com/?apikey=${apiKey}&s=${titleValue}&y=${yearValue}`;
+    } else {
+        query = `http://www.omdbapi.com/?apikey=${apiKey}&s=${titleValue}&type=${typeValue}&y=${yearValue}`;
+    };
+    console.log(query);
+    fetch(query)
+        .then(function(response){
+            console.log(response);
+            if (!response.ok){
+                console.log(response.status);
+            }
+            return response.json();
+        })
+        .then(function (res){
+            jsonResults = res;
+            console.log(res);
+
+            for(i=0; i < jsonResults.Search.length; i++){
+                resultsP.createElement("div").add
+                resultsP.innerText = jsonResults.Search[0].Title
+        }
+            
+        });
 });
+
+// take values and format for API request / parse
+// http://www.omdbapi.com/?apikey=bc1b5902&t=For&type=Movie&y=1994
+
+// apikey
+// t = title
+// type = type
+// y = year
+
+// set up request
+
+// stringify and convert back for html

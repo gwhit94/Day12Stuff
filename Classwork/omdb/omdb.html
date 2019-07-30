@@ -5,11 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OMDB</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+
+        }
+        body{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            display: flex;
+            flex-flow: column nowrap;
+            background-color: #FFB8C4;
+            text-shadow: 1px 1px #B8FFC5;
+        }
+        header{
+            height: 40px;
+            background-color: #43B358;
+            line-height: 40px;
+            align-content: center;
+            /* font-size: 35px; */
+            width: 100%;
+            text-size-adjust: auto;
+            box-shadow: inset 0 0 7px darkgreen;
+        }
+        /* helper classes */
+        .center {
+            text-align: center;
+        }
+
+
+        .container{
+            flex-basis: 100%;
+        }
+        
+        .searchBox{
+            height: 50px;
+        }
+        .inputForm{
+            background-color: #D1FFDA;
+            box-shadow: inset 0 0 7px  #43B358;
+        }
+        .resultsField{
+            background-color: #FFB8C4;
+            box-shadow: inset 0 0 7px #B35D6C;
+            text-align: left;
+            white-space: wrap;
+            overflow: auto;
+            text-overflow: ellipsis;
+        }
+        
+        #typeSelect, #searchBox, #yearBox, #searchButton{
+            height: 20px;
+            width: 150px;
+            margin: 10px;
+            flex-basis: 100%;
+            box-shadow: 2px 2px 2px #43B358;
+        }
+        option {
+            width: 120px;
+        }
+        
+        @media (min-width: 700px){
+            header{
+                font-size: 35px;
+            }
+            body{
+                flex-flow: row wrap;
+            }
+            .inputForm{
+                flex-basis: 350px;
+                height: 100vw;
+                flex-direction: column;
+            }
+            .resultsField{
+                max-width: calc(100% - 350px);
+                height: 100vw;
+            }
+
+            #typeselect, #searchBox, #yearbox, #searchbutton{
+            height: 20px;
+            flex-basis: 100%; 
+
+            }
+        }
+
+        
+    </style>
 </head>
+<header class="center">
+        EXCELLENT MOVIE LOOK UP SERVICE!
+</header>
+    <!-- SEARCH INPUT -->
 <body>
-    <p>Search for a movie title (Min 3 characters)</p>
-    <input id="searchBox" type="text" name="search" placeholder="Search"><input id="searchButton" type="button" value="Search">
-    <p class="results"></p>
+    <div class="container inputForm center">
+        <p>Search for a movie title (Min 3 characters)</p>
+        
+        <div class="userInput">
+            Title: <input id="searchBox" type="text" name="title" placeholder="Title">
+        </div>
+        
+        
+        <div class="userInput">
+            Type: <select name="type" id="typeSelect"> Select a type.
+                    <option name="type" value="" selected></option>
+                    <option name="type" value="Movie">Movie</option>
+                    <option name="type" value="Series">Series</option>
+                    <option name="type" value="Episode">Episode</option>
+            </select>
+        </div>
+
+        <div class="userInput">
+           Year: <input id="yearBox" type="number" min="1900" max="2020" name="year" placeholder="yyyy">
+        </div>
+
+        <div>
+            <input id="searchButton" type="button" value="Search">
+        </div>
+    </div>
+    <!-- RESULTS -->
+    <div class="container resultsField">
+        <p class="results"></p>
+    </div>
+    
+    
     <script src="script.js"></script>
 </body>
+
 </html>
